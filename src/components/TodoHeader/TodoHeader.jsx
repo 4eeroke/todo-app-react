@@ -25,6 +25,8 @@ const TodoHeader = ({setTodos}) => {
         checked: false
       });
 
+      localStorage.setItem('todos', JSON.stringify(prevState))
+
       return prevState;
     });
 

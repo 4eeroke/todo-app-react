@@ -1,35 +1,39 @@
 import formatDate from "../../utils/formatDate";
 
-const TodoItem = ({setTodos, todo}) => {
+const TodoItem = ({ setTodos, todo }) => {
 
     // Функция переключение статуса задачи
     const onCheckedToggle = (id) => {
         setTodos((prevState) => {
-        prevState = [...prevState];
+            prevState = [...prevState];
 
-        prevState = prevState.map((todo) => {
-            if (todo.id === id) {
-            return {
-                ...todo,
-                checked: !todo.checked
-            }
-            }
+            prevState = prevState.map((todo) => {
+                if (todo.id === id) {
+                    return {
+                        ...todo,
+                        checked: !todo.checked
+                    }
+                }
 
-            return todo;
+                return todo;
+            });
+
+            localStorage.setItem('todos', JSON.stringify(prevState))
+
+            return prevState;
         });
-
-        return prevState;
-        });
-    }  
+    }
 
     // Функция удаления todo из массива по ID
     const onDeleteTodoById = (id) => {
         setTodos((prevState) => {
-        prevState = [...prevState];
+            prevState = [...prevState];
 
-        prevState = prevState.filter((todo) => todo.id !== id);
+            prevState = prevState.filter((todo) => todo.id !== id);
 
-        return prevState;
+            localStorage.setItem('todos', JSON.stringify(prevState))
+
+            return prevState;
         });
     }
 
